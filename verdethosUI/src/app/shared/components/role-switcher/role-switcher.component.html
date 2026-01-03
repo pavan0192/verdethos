@@ -2,8 +2,8 @@
   <label for="roleSelect" class="role-label">Role:</label>
   <select
     id="roleSelect"
-    [value]="currentRole"
-    (change)="onRoleChange($any($event.target).value)"
+    [ngModel]="currentRole()"
+    (ngModelChange)="onRoleChange($event)"
     class="role-select"
   >
     @for (role of roles; track role.value) {

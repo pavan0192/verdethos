@@ -8,13 +8,30 @@ import { ProducerStatus } from '../models/producer.model';
 })
 export class RbacService {
   // Mock current user - in production, this would come from auth service
-  private currentUser = signal<User>({
-    id: '1',
-    name: 'Bob Smith',
-    email: 'bob.smith@example.com',
-    role: UserRole.ADMIN, // Can be changed to COMPLIANCE or VIEWER for testing
-    tenantId: 'tenant-1'
-  });
+  private currentUser = signal<User>(this.initializeUser());
+
+  private initializeUser(): User {
+    // Try to load role from localStorage (for testing/demo)
+    let role = UserRole.ADMIN;
+    
+    try {
+      const savedRole = localStorage.getItem('demo_user_role');
+      if (savedRole && Object.values(UserRole).includes(savedRole as UserRole)) {
+        role = savedRole as UserRole;
+      }
+    } catch (e) {
+      console.warn('Failed to read role from localStorage:', e);
+      // Default to ADMIN if localStorage is not available
+    }
+
+    return {
+      id: '1',
+      name: 'Bob Smith',
+      email: 'bob.smith@example.com',
+      role: role,
+      tenantId: 'tenant-1'
+    };
+  }
 
   // Permission mapping: Role -> Permissions
   private rolePermissions: Map<UserRole, Permission[]> = new Map([
@@ -59,6 +76,8 @@ export class RbacService {
    */
   setCurrentUser(user: User) {
     this.currentUser.set(user);
+    // Save role to localStorage for persistence across page reloads
+    localStorage.setItem('demo_user_role', user.role);
   }
 
   /**

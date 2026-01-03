@@ -1,4 +1,4 @@
-import { Directive, Input, TemplateRef, ViewContainerRef, inject } from '@angular/core';
+import { Directive, Input, TemplateRef, ViewContainerRef, inject, effect } from '@angular/core';
 import { RbacService } from '../../services/rbac.service';
 import { Permission } from '../../models/permission.model';
 
@@ -20,6 +20,18 @@ export class HasPermissionDirective {
 
   private hasView = false;
   private permissions: Permission[] = [];
+
+  constructor() {
+    // React to user changes - re-evaluate permissions when user role changes
+    effect(() => {
+      // Access the current user signal to create a dependency
+      this.rbacService.getCurrentUser()();
+      // Re-evaluate permissions when user changes
+      if (this.permissions.length > 0) {
+        this.updateView();
+      }
+    });
+  }
 
   @Input() set hasPermission(permissions: Permission | Permission[]) {
     this.permissions = Array.isArray(permissions) ? permissions : [permissions];

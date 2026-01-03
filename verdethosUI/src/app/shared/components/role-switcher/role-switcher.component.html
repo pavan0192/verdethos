@@ -1,0 +1,14 @@
+<div class="role-switcher">
+  <label for="roleSelect" class="role-label">Role:</label>
+  <select
+    id="roleSelect"
+    [value]="currentRole"
+    (change)="onRoleChange($any($event.target).value)"
+    class="role-select"
+  >
+    @for (role of roles; track role.value) {
+      <option [value]="role.value">{{ role.label }}</option>
+    }
+  </select>
+</div>
+

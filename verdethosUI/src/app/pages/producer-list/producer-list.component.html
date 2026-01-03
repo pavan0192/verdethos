@@ -1,0 +1,85 @@
+<div class="producer-list-page">
+  <div class="page-header">
+    <h1 class="page-title">Producers</h1>
+    @if (canCreateProducer()) {
+      <button class="add-button" (click)="onAddProducer()" type="button">
+        <span>Add Producer</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    }
+  </div>
+
+  <app-status-tabs
+    [tabs]="statusTabs()"
+    [activeTab]="activeStatusTab()"
+    (tabChange)="onTabChange($event)"
+  ></app-status-tabs>
+
+  <app-search-filter
+    [searchValue]="searchValue()"
+    [activeFilters]="activeFilters()"
+    (searchChange)="onSearchChange($event)"
+    (removeFilter)="onRemoveFilter($event)"
+    (openFilters)="onOpenFilters()"
+    (openActions)="onOpenActions()"
+  ></app-search-filter>
+
+  <div class="table-wrapper">
+    <table class="producer-table">
+      <thead>
+        <tr>
+          <th class="table-header">Producer Name</th>
+          <th class="table-header">Producer Type</th>
+          <th class="table-header"># of Farms</th>
+          <th class="table-header">Serasa</th>
+          <th class="table-header">EUDR</th>
+          <th class="table-header">Status</th>
+          <th class="table-header actions-header"></th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (producers().length === 0) {
+          <tr>
+            <td colspan="7" class="empty-state">
+              <div class="empty-message">No producers found</div>
+            </td>
+          </tr>
+        } @else {
+          @for (producer of producers(); track producer.id) {
+            <tr class="table-row">
+              <td class="table-cell producer-name">{{ producer.name }}</td>
+              <td class="table-cell">{{ producer.type }}</td>
+              <td class="table-cell farms-count">{{ producer.numberOfFarms }}</td>
+              <td class="table-cell">{{ producer.serasa }}</td>
+              <td class="table-cell">{{ producer.eudr }}</td>
+              <td class="table-cell">
+                <span class="status-badge" [ngClass]="getStatusClass(producer.status)">
+                  {{ producer.status }}
+                </span>
+              </td>
+              <td class="table-cell actions-cell">
+                <app-kebab-menu
+                  [items]="getKebabMenuItems(producer)"
+                  [menuId]="'menu-' + producer.id"
+                  (actionClick)="onKebabAction($event, producer)"
+                ></app-kebab-menu>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <app-pagination
+    [currentPage]="currentPage()"
+    [totalPages]="totalPages()"
+    [pageSize]="pageSize()"
+    [totalItems]="totalItems()"
+    (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)"
+  ></app-pagination>
+</div>
+

@@ -1,0 +1,34 @@
+<div class="table-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        @for (column of columns; track column.key) {
+          <th class="table-header">{{ column.label }}</th>
+        }
+        <th class="table-header actions-header"></th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (data.length === 0) {
+        <tr>
+          <td [attr.colspan]="columns.length + 1" class="empty-state">
+            <div class="empty-message">No producers found</div>
+          </td>
+        </tr>
+      } @else {
+        @for (row of data; track row.id; let i = $index) {
+          <tr class="table-row">
+            <ng-container [ngTemplateOutlet]="rowTemplate || defaultRowTemplate" [ngTemplateOutletContext]="{ $implicit: row, index: i }"></ng-container>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</div>
+
+<ng-template #defaultRowTemplate let-row>
+  @for (column of columns; track column.key) {
+    <td class="table-cell">{{ row[column.key] }}</td>
+  }
+</ng-template>
+

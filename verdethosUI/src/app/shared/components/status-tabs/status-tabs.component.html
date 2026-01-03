@@ -1,0 +1,14 @@
+<div class="status-tabs">
+  @for (tab of tabs; track tab.value) {
+    <button
+      class="tab-button"
+      [class.active]="activeTab === tab.value"
+      (click)="selectTab(tab.value)"
+      type="button"
+    >
+      <span class="tab-label">{{ tab.label }}</span>
+      <span class="tab-count">{{ tab.count }}</span>
+    </button>
+  }
+</div>
+

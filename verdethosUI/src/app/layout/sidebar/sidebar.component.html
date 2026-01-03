@@ -1,0 +1,15 @@
+<aside class="sidebar">
+  <nav class="sidebar-nav">
+    @for (item of menuItems; track item.label) {
+      <a
+        *hasPermission="item.permission"
+        [routerLink]="item.route"
+        [routerLinkActive]="'active'"
+        class="sidebar-item"
+      >
+        <span class="sidebar-item-label">{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+</aside>
+

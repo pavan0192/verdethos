@@ -1,0 +1,20 @@
+<div class="main-layout">
+  <app-header></app-header>
+  
+  <div class="layout-body">
+    <app-sidebar></app-sidebar>
+    
+    <main class="main-content">
+      <!-- Role Switcher for Testing (Remove in production) -->
+      <app-role-switcher></app-role-switcher>
+      
+      @if (breadcrumbs.length > 0) {
+        <app-breadcrumb [items]="breadcrumbs"></app-breadcrumb>
+      }
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+</div>
+

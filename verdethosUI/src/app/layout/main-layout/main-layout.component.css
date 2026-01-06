@@ -5,6 +5,10 @@
   background-color: #ffffff;
 }
 
+.main-layout app-breadcrumb {
+  flex-shrink: 0;
+}
+
 .layout-body {
   display: flex;
   flex: 1;

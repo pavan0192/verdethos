@@ -9,6 +9,20 @@
   margin-bottom: 1.5rem;
 }
 
+.title-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.title-bar {
+  width: 4px;
+  height: 1.75rem;
+  background-color: #28a745;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
 .page-title {
   font-size: 1.75rem;
   font-weight: 600;

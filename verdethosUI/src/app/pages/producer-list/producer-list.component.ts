@@ -1,6 +1,8 @@
 import { Component, OnInit, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { ProducerService } from '../../services/producer.service';
 import { RbacService } from '../../services/rbac.service';
 import { Producer, ProducerStatus } from '../../models/producer.model';
@@ -9,7 +11,6 @@ import { SearchFilterComponent } from '../../shared/components/search-filter/sea
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { KebabMenuComponent, KebabMenuItem } from '../../shared/components/kebab-menu/kebab-menu.component';
 import { Permission } from '../../models/permission.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-producer-list',
@@ -60,8 +61,18 @@ export class ProducerListComponent implements OnInit {
   constructor(
     private producerService: ProducerService,
     private rbacService: RbacService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    // Reload data when navigating to this route
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        if (this.router.url.includes('/supplier-management/producers')) {
+          this.loadProducers();
+        }
+      });
+  }
 
   ngOnInit() {
     this.loadProducers();

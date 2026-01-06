@@ -13,6 +13,11 @@ export const routes: Routes = [
     path: 'supplier-management',
     children: [
       {
+        path: '',
+        redirectTo: 'producers',
+        pathMatch: 'full'
+      },
+      {
         path: 'producers',
         component: ProducerListComponent,
         canActivate: [rbacGuard(Permission.VIEW_PRODUCERS)]

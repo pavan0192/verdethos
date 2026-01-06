@@ -1,6 +1,6 @@
 .search-filter-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }

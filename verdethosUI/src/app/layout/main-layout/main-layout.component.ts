@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component';
-import { RoleSwitcherComponent } from '../../shared/components/role-switcher/role-switcher.component';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { BreadcrumbItem } from '../../shared/components/breadcrumb/breadcrumb.component';
 import { filter } from 'rxjs/operators';
@@ -16,7 +15,6 @@ import { filter } from 'rxjs/operators';
     HeaderComponent,
     SidebarComponent,
     BreadcrumbComponent,
-    RoleSwitcherComponent,
     RouterOutlet
   ],
   templateUrl: './main-layout.component.html',
@@ -36,7 +34,7 @@ export class MainLayoutComponent {
 
   private updateBreadcrumbs() {
     const url = this.router.url;
-    if (url.includes('/supplier-management/producers')) {
+    if (url.includes('/supplier-management/producers') || url === '/supplier-management') {
       this.breadcrumbs = [
         { label: 'Supplier Management', route: '/supplier-management' },
         { label: 'Producers', route: '/supplier-management/producers' }

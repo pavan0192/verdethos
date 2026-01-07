@@ -34,6 +34,10 @@
   margin-left: 2rem;
 }
 
+.header-content app-role-switcher {
+  margin-left: 2rem;
+}
+
 .nav-item {
   color: white;
   text-decoration: none;

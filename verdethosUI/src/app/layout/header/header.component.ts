@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { RbacService } from '../../services/rbac.service';
 import { Permission } from '../../models/permission.model';
 import { HasPermissionDirective } from '../../shared/directives/has-permission.directive';
+import { RoleSwitcherComponent } from '../../shared/components/role-switcher/role-switcher.component';
 
 interface MenuItem {
   label: string;
@@ -14,7 +15,7 @@ interface MenuItem {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, HasPermissionDirective],
+  imports: [CommonModule, RouterModule, HasPermissionDirective, RoleSwitcherComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

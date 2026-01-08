@@ -37,27 +37,64 @@ Verdethos UI is a multi-tenant B2B SaaS platform built with **Angular 20**, impl
                              ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                    ANGULAR APPLICATION                          │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │              App Component (Root)                        │  │
-│  │  ┌────────────────────────────────────────────────────┐  │  │
-│  │  │         Main Layout Component                      │  │  │
-│  │  │  ┌──────────────┐  ┌──────────────────────────┐  │  │  │
-│  │  │  │   Header     │  │    Sidebar               │  │  │  │
-│  │  │  │  Component   │  │    Component             │  │  │  │
-│  │  │  └──────────────┘  └──────────────────────────┘  │  │  │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │              App Component (Root)                        │   │
+│  │  ┌────────────────────────────────────────────────────┐  │   │
+│  │  │         Main Layout Component                      │  │   │
+│  │  │  ┌──────────────┐  ┌──────────────────────────┐    │  │   │
+│  │  │  │   Header     │  │    Sidebar               │    │  │   │
+│  │  │  │  Component   │  │    Component             │    │  │   │
+│  │  │  │  - Main Menu │  │    - Nav Items           │    │  │   │
+│  │  │  │  - User Ctrl │  │    - Active State        │    │  │   │
+│  │  │     - Role Switcher│                          │    │  │   │
+│  │  │  └──────────────┘  └──────────────────────────┘    │  │   │
 │  │  │  ┌──────────────────────────────────────────────┐ │  │  │
 │  │  │  │         Router Outlet                        │ │  │  │
-│  │  │  │  ┌────────────────────────────────────────┐ │ │  │  │
-│  │  │  │  │    Producer List Component             │ │ │  │  │
-│  │  │  │  │  ┌──────────────────────────────────┐ │ │ │  │  │
-│  │  │  │  │  │  Status Tabs Component          │ │ │ │  │  │
-│  │  │  │  │  │  Search Filter Component        │ │ │ │  │  │
-│  │  │  │  │  │  Kebab Menu Component           │ │ │ │  │  │
-│  │  │  │  │  │  Pagination Component           │ │ │ │  │  │
-│  │  │  │  │  └──────────────────────────────────┘ │ │ │  │  │
-│  │  │  │  └────────────────────────────────────────┘ │ │  │  │
+│  │  │  │  ┌────────────────────────────────────────┐  │ │  │  │
+│  │  │  │  │    Producer List Component             │  │ │  │  │
+│  │  │  │  │  ┌──────────────────────────────────┐  │  │ │  │  │
+│  │  │  │  │  │  Status Tabs Component           │  │  │ │  │  │
+│  │  │  │  │  │  Search Filter Component         │  │  │ │  │  │
+│  │  │  │  │  │  Kebab Menu Component            │  │  │ │  │  │
+│  │  │  │  │  │  Pagination Component            │  │  │ │  │  │
+│  │  │  │  │  └──────────────────────────────────┘  │  │ │  │  │
+│  │  │  │  └────────────────────────────────────────┘  │ │  │  │
 │  │  │  └──────────────────────────────────────────────┘ │  │  │
 │  │  └────────────────────────────────────────────────────┘  │  │
+│  └──────────────────────────────────────────────────────────┘  │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                  SHARED COMPONENTS LAYER                        │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │ Status Tabs  │  │Search Filter │  │  Pagination  │           │
+│  │ Component    │  │  Component   │  │  Component   │           │
+│  │ - Tab Nav    │  │ - Search     │  │ - Page Nav   │           │
+│  │ - Counts     │  │ - Filters    │  │ - Page Size  │           │
+│  └──────────────┘  └──────────────┘  └──────────────┘           │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │Kebab Menu    │  │ Breadcrumb   │  │ Data Table   │           │
+│  │ Component    │  │  Component   │  │  Component   │           │
+│  │ - Actions    │  │ - Nav Path   │  │ - Generic    │           │
+│  │ - Permissions│  │              │  │   Table      │           │
+│  └──────────────┘  └──────────────┘  └──────────────┘           │
+│  ┌──────────────┐  ┌──────────────┐                             │
+│  │ Directives  │  │    Pipes     │                              │
+│  │ - *hasPermission│ - hasPermission│                          │
+│  │              │  │              │                           │
+│  │ Used by:     │  │ Used by:     │                           │
+│  │ - Header     │  │ - Templates  │                           │
+│  │ - Sidebar    │  │              │                           │
+│  │ - Kebab Menu│  │              │                           │
+│  └──────────────┘  └──────────────┘                           │
+│                                                                 │
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │              Consumed by Pages & Layouts                │  │
+│  │  - Producer List Page uses: Status Tabs, Search Filter, │  │
+│  │    Kebab Menu, Pagination                               │  │
+│  │  - Main Layout uses: Breadcrumb                         │  │
+│  │  - All components use: Directives & Pipes               │  │
 │  └──────────────────────────────────────────────────────────┘  │
 └────────────────────────────┬────────────────────────────────────┘
                              │
@@ -67,12 +104,22 @@ Verdethos UI is a multi-tenant B2B SaaS platform built with **Angular 20**, impl
 │  ┌──────────────────┐  ┌──────────────────┐                   │
 │  │  RBAC Service    │  │ Producer Service  │                   │
 │  │  (Permissions)  │  │  (Data & CRUD)   │                   │
+│  │  - User State   │  │  - Filtering     │                   │
+│  │  - Permission   │  │  - Pagination    │                   │
+│  │    Checks       │  │  - Signals       │                   │
 │  └──────────────────┘  └──────────────────┘                   │
 │  ┌──────────────────┐  ┌──────────────────┐                   │
 │  │ Tenant Service   │  │  Mock Data       │                   │
 │  │  (Multi-tenant)  │  │  (1200 records)  │                   │
 │  └──────────────────┘  └──────────────────┘                   │
-└─────────────────────────────────────────────────────────────────┘
+│                                                                 │
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │              Consumed by All Layers                      │  │
+│  │  - Components consume services for data & logic          │  │
+│  │  - Guards consume RbacService for route protection       │  │
+│  │  - Directives consume RbacService for UI permissions     │  │
+│  └──────────────────────────────────────────────────────────┘  │
+└────────────────────────────┬────────────────────────────────────┘
                              │
                              ▼
 ┌─────────────────────────────────────────────────────────────────┐
@@ -82,7 +129,14 @@ Verdethos UI is a multi-tenant B2B SaaS platform built with **Angular 20**, impl
 │  │  - User          │  │  - 1200 items    │                   │
 │  │  - Producer      │  │  - Filtered      │                   │
 │  │  - Permission    │  │  - Paginated     │                   │
+│  │  - Enums         │  │  - Tenant-based  │                   │
 │  └──────────────────┘  └──────────────────┘                   │
+│                                                                 │
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │              Foundation for All Layers                   │  │
+│  │  - Models define types used by services & components     │  │
+│  │  - Mock data provides test data for development         │  │
+│  └──────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 

@@ -146,37 +146,6 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory.
 
-### Running Unit Tests
-
-```bash
-ng test
-```
-
-### Code Scaffolding
-
-To generate a new component:
-
-```bash
-ng generate component component-name
-```
-
-## Implementation Details
-
-### 7. Web UI — Producer List Page (Angular)
-
-The Producer List Page is a fully functional Angular component that displays producer data in a table format with features including search, filtering, pagination, and status-based actions. The implementation includes a responsive layout with header navigation, sidebar menu, status tabs, search functionality, and a kebab menu for row-level actions. All code for this implementation is available in the GitHub repository at [https://github.com/pavan0192/verdethos/tree/main/verdethosUI](https://github.com/pavan0192/verdethos/tree/main/verdethosUI).
-
-### 8. RBAC — Minimal but Real
-
-The Role-Based Access Control (RBAC) implementation provides a minimal but functional permission system with three levels of access control: main menu visibility, route guards, and row-level action permissions. The system supports multiple roles (Admin, Compliance, Viewer) with granular permission checks using directives, pipes, and service methods. All RBAC implementation code is available in the GitHub repository at [https://github.com/pavan0192/verdethos/tree/main/verdethosUI](https://github.com/pavan0192/verdethos/tree/main/verdethosUI).
-
-### 9. Mobile — One Small Proof (Not a Full App)
-
-A minimal mobile proof-of-concept implementation using Ionic and Angular, demonstrating a single Producer Details page with responsive design. The implementation includes a centered card layout, theme integration matching the web application, and basic producer information display. This serves as a proof of concept rather than a full mobile application. All mobile implementation code is available in the GitHub repository at [https://github.com/pavan0192/verdethos/tree/main/verdethosIonic](https://github.com/pavan0192/verdethos/tree/main/verdethosIonic).
-
-### 10. Backend — Skeleton Only (Optional but Preferred)
-
-A minimal Node.js backend API skeleton providing a GET endpoint for producers with tenant isolation middleware. The implementation includes in-memory mock data, basic error handling, and pagination support. This serves as a foundation for future backend development. All backend implementation code is available in the GitHub repository at [https://github.com/pavan0192/verdethos/tree/main/verdethosBE](https://github.com/pavan0192/verdethos/tree/main/verdethosBE).
 
 ## 📄 License
 

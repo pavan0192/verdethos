@@ -224,7 +224,43 @@ The diagram illustrates the high-level application structure and dependencies:
 
 #### 3.2 Mobile App
 
-*To be documented in future iterations*
+**Architectural Approach**
+
+The mobile application is a minimal proof-of-concept built with Ionic and Angular, demonstrating a single Producer Details page:
+
+- **Ionic Framework**: Cross-platform mobile development with Angular
+- **Module-Based Architecture**: Uses Angular modules (not standalone components) for compatibility
+- **Shared Design System**: Header color and styling match the web application theme
+- **Responsive Layout**: Centered card design optimized for mobile viewing
+- **Single Page Implementation**: Producer Details page serves as a mobile proof, not a full application
+
+**Technology Stack**
+
+- **Ionic Angular**: 8.0.0
+- **Angular**: 20.0.0
+- **TypeScript**: 5.9.0
+- **Capacitor**: 8.0.0 (for native mobile capabilities)
+- **Ionicons**: 7.0.0
+
+**Project Structure**
+
+```
+src/app/
+├── app.module.ts              # Root module
+├── app-routing.module.ts     # Route configuration
+├── app.component.ts          # Root component
+└── producer-details/          # Producer Details page
+    ├── producer-details.page.ts
+    ├── producer-details.page.html
+    └── producer-details.page.scss
+```
+
+**Implementation Notes**
+
+- **Proof of Concept**: This is a minimal implementation demonstrating mobile UI capabilities, not a full mobile application
+- **Design Consistency**: Header color (#2a524e) matches the web application for brand consistency
+- **Centered Layout**: Card-based design with centered content for optimal mobile viewing
+- **Future Expansion**: Structure allows for easy expansion to include additional pages and features
 
 #### 3.3 Backend API
 

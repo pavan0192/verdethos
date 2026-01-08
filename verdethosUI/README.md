@@ -146,20 +146,6 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory.
 
-### Running Unit Tests
-
-```bash
-ng test
-```
-
-### Code Scaffolding
-
-To generate a new component:
-
-```bash
-ng generate component component-name
-```
-
 
 ## 📄 License
 
